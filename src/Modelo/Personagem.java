@@ -29,7 +29,6 @@ public abstract class Personagem implements Serializable {
     protected boolean bTransponivel; /*Pode passar por cima?*/
     protected boolean bMortal;       /*Se encostar, o Bomberman morre?*/
 
-
     protected Personagem(String sNomeImagePNG) {
         this.pPosicao = new Posicao(1, 1);
         this.bTransponivel = true;
@@ -82,5 +81,13 @@ public abstract class Personagem implements Serializable {
 
     public boolean moveLeft() {
         return this.pPosicao.moveLeft();
+    }
+
+    public int getLinha() {
+        return this.pPosicao.getLinha();
+    }
+
+    public int getColuna() {
+        return this.pPosicao.getColuna();
     }
 }

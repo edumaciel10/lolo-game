@@ -26,6 +26,8 @@ public class Lolo extends Elemento {
     private static final byte DIREITA = 3;
     private static int ultimoMovimento = BAIXO;
 
+    private static int vidas = 0;
+
     public Lolo() {
         super(nomesImagens[BAIXO]);
         criaImagens();
@@ -76,5 +78,21 @@ public class Lolo extends Elemento {
         ultimoMovimento = ESQUERDA;
         atualizaImagem();
         return this.pPosicao.moveLeft();
+    }
+
+    public int getLinha() {
+        return this.pPosicao.getLinha();
+    }
+
+    public int getColuna() {
+        return this.pPosicao.getColuna();
+    }
+
+    public void setVida(int vida) {
+        vidas = vida;
+    }
+
+    public int getVida() {
+        return vidas;
     }
 }

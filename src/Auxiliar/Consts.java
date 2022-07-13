@@ -13,6 +13,7 @@ import java.io.File;
  */ 
 public class Consts {
     public static final int CELL_SIDE = 70;
+    // quantidade de linha e coluna
     public static final int RES = 13;
     public static final int PERIOD = 120;
     public static final String PATH = File.separator+"imgs"+File.separator;
