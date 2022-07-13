@@ -41,32 +41,26 @@ import java.util.zip.GZIPOutputStream;
  */
 public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener {
 
-    private ArrayList<Elemento>[] fases = new ArrayList[]{new Fase1(), new Fase2(), new Fase3()};
+    private ArrayList<Elemento>[] fases = new ArrayList[] { new Fase1(), new Fase2(), new Fase3() };
     private byte indiceFaseAtual = 0;
     private ArrayList<Elemento> e = fases[indiceFaseAtual];
     private Lolo lLolo = (Lolo) e.get(0);
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
+
     /**
      * Creates new form tabuleiro
      */
     public Tela() {
         Desenho.setCenario(this);
         initComponents();
-        this.addMouseListener(this); /*mouse*/
+        this.addMouseListener(this); /* mouse */
 
-        this.addKeyListener(this);   /*teclado*/
-        /*Cria a janela do tamanho do tabuleiro + insets (bordas) da janela*/
+        this.addKeyListener(this); /* teclado */
+        /* Cria a janela do tamanho do tabuleiro + insets (bordas) da janela */
         this.setSize((Consts.RES + 1) * Consts.CELL_SIDE + getInsets().left + getInsets().right,
                 Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
-
-
-
-
-
-
     }
-
 
     public void addPersonagem(Elemento umPersonagem) {
         e.add(umPersonagem);
@@ -76,43 +70,49 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         e.remove(umPersonagem);
     }
 
-    public Graphics getGraphicsBuffer(){
+    public Graphics getGraphicsBuffer() {
         return g2;
     }
+
     public void paint(Graphics gOld) {
         Graphics g = this.getBufferStrategy().getDrawGraphics();
-        /*Criamos um contexto gráfico*/
+        /* Criamos um contexto gráfico */
         g2 = g.create(getInsets().left, getInsets().top, getWidth() - getInsets().right, getHeight() - getInsets().top);
-        /*************Desenha cenário de fundo**************/
+        /************* Desenha cenário de fundo **************/
         for (int i = 0; i < Consts.RES; i++) {
             for (int j = 0; j < Consts.RES + 1; j++) {
                 try {
                     Image newImage;
 
-
                     // Pinta de preto parte do menu a direita
                     if (j == Consts.RES) {
-                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "black.png");
+                        newImage = Toolkit.getDefaultToolkit()
+                                .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "black.png");
                     }
                     // Muro esquerda
                     else if (j == 0) {
-                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "muroEsquerda.png");
+                        newImage = Toolkit.getDefaultToolkit()
+                                .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "muroEsquerda.png");
                     }
                     // Muro direita
-                    else if (j == Consts.RES-1) {
-                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "muroDireita.png");
+                    else if (j == Consts.RES - 1) {
+                        newImage = Toolkit.getDefaultToolkit()
+                                .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "muroDireita.png");
                     }
                     // Muro baixo
-                    else if (i == Consts.RES-1) {
-                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "muroBaixo.png");
+                    else if (i == Consts.RES - 1) {
+                        newImage = Toolkit.getDefaultToolkit()
+                                .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "muroBaixo.png");
                     }
                     // Muro cima
                     else if (i == 0) {
-                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "muroCima.png");
+                        newImage = Toolkit.getDefaultToolkit()
+                                .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "muroCima.png");
                     }
                     // Fundo normal
                     else {
-                        newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "bricks.png");
+                        newImage = Toolkit.getDefaultToolkit()
+                                .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "bricks.png");
                     }
                     g2.drawImage(newImage,
                             j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
@@ -124,10 +124,12 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
 
         // Imprime ícones a direita
         try {
-            Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "loloBaixo.png");
+            Image newImage = Toolkit.getDefaultToolkit()
+                    .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "loloBaixo.png");
             g2.drawImage(newImage,
                     13 * Consts.CELL_SIDE, 1 * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-            newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "menuTiro.png");
+            newImage = Toolkit.getDefaultToolkit()
+                    .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "menuTiro.png");
             g2.drawImage(newImage,
                     13 * Consts.CELL_SIDE, 3 * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
         } catch (IOException ex) {
@@ -165,8 +167,8 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 FileInputStream canoOut = new FileInputStream(tanque);
                 GZIPInputStream compactador = new GZIPInputStream(canoOut);
                 ObjectInputStream serializador = new ObjectInputStream(compactador);
-                this.e = (ArrayList<Elemento>)serializador.readObject();
-                this.lLolo = (Lolo)this.e.get(0);
+                this.e = (ArrayList<Elemento>) serializador.readObject();
+                this.lLolo = (Lolo) this.e.get(0);
                 serializador.close();
             } catch (Exception ex) {
                 Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
@@ -200,18 +202,19 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         this.setTitle("-> Cell: " + (lLolo.getPosicao().getColuna()) + ", "
                 + (lLolo.getPosicao().getLinha()));
 
-        //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
+        // repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
     }
 
     public void mousePressed(MouseEvent e) {
-        /* Clique do mouse desligado
-         int x = e.getX();
-         int y = e.getY();
-     
-         this.setTitle("X: "+ x + ", Y: " + y +
-         " -> Cell: " + (y/Consts.CELL_SIDE) + ", " + (x/Consts.CELL_SIDE));
-        
-         this.lLolo.getPosicao().setPosicao(y/Consts.CELL_SIDE, x/Consts.CELL_SIDE);
+        /*
+         * Clique do mouse desligado
+         * int x = e.getX();
+         * int y = e.getY();
+         * 
+         * this.setTitle("X: "+ x + ", Y: " + y +
+         * " -> Cell: " + (y/Consts.CELL_SIDE) + ", " + (x/Consts.CELL_SIDE));
+         * 
+         * this.lLolo.getPosicao().setPosicao(y/Consts.CELL_SIDE, x/Consts.CELL_SIDE);
          */
         repaint();
     }
@@ -222,7 +225,8 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -234,18 +238,16 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 561, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 561, Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 500, Short.MAX_VALUE));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
+     // Variables declaration - do not modify//GEN-BEGIN:variables
+     // End of variables declaration//GEN-END:variables
 
     public void mouseMoved(MouseEvent e) {
     }
