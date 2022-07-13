@@ -12,8 +12,9 @@ public class Porta extends Elemento {
     private static final ImageIcon[] imagens = new ImageIcon[2];
 
     protected Porta() {
-        super("porta.png");
+        super(null);
         criaImagens();
+        iImage = imagens[0]; // começa fechada
     }
     
     private void criaImagens() {

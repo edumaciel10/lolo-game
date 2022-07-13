@@ -6,6 +6,7 @@
 package Modelo;
 
 import Auxiliar.Consts;
+import Auxiliar.Posicao;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,13 +25,28 @@ public class Lolo extends Elemento {
     private static final byte CIMA = 1;
     private static final byte ESQUERDA = 2;
     private static final byte DIREITA = 3;
-    private static int ultimoMovimento = BAIXO;
+    private static byte ultimoMovimento = BAIXO;
 
     private static int vidas = 0;
 
     public Lolo() {
-        super(nomesImagens[BAIXO]);
+        super(null);
         criaImagens();
+        iImage = imagens[0]; // começa virado pra baixo
+    }
+
+    public void atira(Fase faseAtual) {
+        Tiro tiro = new Tiro(ultimoMovimento);
+        Posicao posTiro = new Posicao(1, 1);
+        switch (ultimoMovimento) {
+            case BAIXO -> posTiro.setPosicao(pPosicao.getLinha() + 1, pPosicao.getColuna());
+            case CIMA -> posTiro.setPosicao(pPosicao.getLinha() - 1, pPosicao.getColuna());
+            case ESQUERDA -> posTiro.setPosicao(pPosicao.getLinha(), pPosicao.getColuna() - 1);
+            case DIREITA -> posTiro.setPosicao(pPosicao.getLinha(), pPosicao.getColuna() + 1);
+        }
+
+        tiro.pPosicao = posTiro;
+        faseAtual.add(tiro);
     }
 
     private void criaImagens() {
