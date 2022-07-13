@@ -17,7 +17,7 @@ import java.io.Serializable;
  *
  * @author Junio
  */
-public class Lolo extends Elemento implements Serializable{
+public class Lolo extends Elemento {
     private static final String[] nomesImagens = {"loloBaixo.png", "loloCima.png", "loloEsquerda.png", "loloDireita.png"};
     private static final ImageIcon[] imagens = new ImageIcon[4];
     private static final byte BAIXO = 0;

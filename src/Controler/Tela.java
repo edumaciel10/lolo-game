@@ -27,7 +27,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -41,9 +40,9 @@ import java.util.zip.GZIPOutputStream;
  */
 public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener {
 
-    private ArrayList<Elemento>[] fases = new ArrayList[] { new Fase1(), new Fase2(), new Fase3() };
+    private Fase[] fases = new Fase[] { new Fase1(), new Fase2(), new Fase3() };
     private byte indiceFaseAtual = 0;
-    private ArrayList<Elemento> e = fases[indiceFaseAtual];
+    private Fase e = fases[indiceFaseAtual];
     private Lolo lLolo = (Lolo) e.get(0);
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
@@ -167,7 +166,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 FileInputStream canoOut = new FileInputStream(tanque);
                 GZIPInputStream compactador = new GZIPInputStream(canoOut);
                 ObjectInputStream serializador = new ObjectInputStream(compactador);
-                this.e = (ArrayList<Elemento>) serializador.readObject();
+                this.e = (Fase) serializador.readObject();
                 this.lLolo = (Lolo) this.e.get(0);
                 serializador.close();
             } catch (Exception ex) {
