@@ -22,7 +22,7 @@ import java.util.ArrayList;
  */
 public class ControleDeJogo {
     public void desenhaTudo(ArrayList<Elemento> e) {
-        for (int i = 0; i < e.size(); i++) {
+        for (int i = e.size()-1; i >= 0 ; i--) {
             e.get(i).autoDesenho();
         }
     }
@@ -33,16 +33,16 @@ public class ControleDeJogo {
         Porta porta = (Porta) e.get(2);
 
         Elemento pTemp;
-        for (int i = 2; i < e.size(); i++) {
+        for (int i = 1; i < e.size(); i++) {
             pTemp = e.get(i);
             if (lolo.getPosicao().igual(pTemp.getPosicao())) {
                 if (pTemp.isbTransponivel()) {
                     if(pTemp instanceof Coracao){
                         e.coracoesRestantes--;
-                        if(e.coracoesRestantes == 5){
+                        if(e.coracoesRestantes == 0){
                             bau.abrirComJoia();
-                            e.remove(pTemp);
                         }
+                        e.remove(pTemp);
                     }
 
                     if(pTemp instanceof Bau && bau.aberto){
@@ -50,15 +50,17 @@ public class ControleDeJogo {
                         // porta.abrir();
                     }
 
-                    if(pTemp instanceof Porta && porta.aberto){
-                        e.proximaFase = true;
-                    }
-
                     if(pTemp.isInimigo()) {
                         e.remove(pTemp);
                     }
                 }
             }
+            if(lolo.getPosicao().igual(porta.getPosicao())){
+                e.proximaFase = true;
+            }
+            
+
+                    
         }
     }
 
