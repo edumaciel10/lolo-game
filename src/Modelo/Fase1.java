@@ -18,7 +18,6 @@ public class Fase1 extends Fase {
         Porta p = new Porta();
         p.setPosicao(0, 6);
         this.add(p);
-        posicaoAbrePorta = new Posicao(1, 6);
 
         Cobrinha c1 = new Cobrinha();
         c1.setPosicao(6, 4);
