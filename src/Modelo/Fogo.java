@@ -14,7 +14,7 @@ import java.io.Serializable;
  *
  * @author junio
  */
-public class Fogo extends Elemento implements Serializable{
+public class Fogo extends Elemento{
             
     public Fogo(String sNomeImagePNG) {
         super(sNomeImagePNG);

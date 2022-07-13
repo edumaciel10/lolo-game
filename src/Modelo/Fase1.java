@@ -1,21 +1,20 @@
 package Modelo;
-
-import java.util.ArrayList;
-
-public class Fase1 extends ArrayList<Elemento> {
+public class Fase1 extends Fase {
     public Fase1() {
         /*Cria e adiciona personagens*/
+        
+        this.coracoesRestantes = 6;
         Lolo lLolo = new Lolo();
         lLolo.setPosicao(8, 6);
         this.add(lLolo);
 
+        Bau b = new Bau();
+        b.setPosicao(3, 6);
+        this.add(b);
+
         Porta p = new Porta();
         p.setPosicao(0, 6);
         this.add(p);
-
-        Bau b = new Bau();
-        b.setPosicao(3, 6   );
-        this.add(b);
 
         Cobrinha c1 = new Cobrinha();
         c1.setPosicao(6, 4);

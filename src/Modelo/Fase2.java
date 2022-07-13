@@ -1,8 +1,6 @@
 package Modelo;
 
-import java.util.ArrayList;
-
-public class Fase2 extends ArrayList<Elemento> {
+public class Fase2 extends Fase {
     public Fase2() {
         /*Cria e adiciona personagens*/
         Lolo lLolo = new Lolo();
