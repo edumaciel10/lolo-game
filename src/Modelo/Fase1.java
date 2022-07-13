@@ -17,6 +17,13 @@ public class Fase1 extends ArrayList<Elemento> {
         b.setPosicao(3, 6   );
         this.add(b);
 
+        Cobrinha c1 = new Cobrinha();
+        c1.setPosicao(6, 4);
+        this.add(c1);
+
+        Cobrinha c2 = new Cobrinha();
+        c2.setPosicao(6, 8);
+        this.add(c2);
         
         adicionaMoitasBrancas();
         adicionaMoitasVerdes();
