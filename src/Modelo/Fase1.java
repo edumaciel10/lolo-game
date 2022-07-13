@@ -1,7 +1,5 @@
 package Modelo;
 public class Fase1 extends Fase {
-    public int coracoesRestantes = 0; // da para mover para um for dps
-
     public Fase1() {
         /*Cria e adiciona personagens*/
         

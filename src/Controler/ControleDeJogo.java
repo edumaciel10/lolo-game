@@ -36,7 +36,7 @@ public class ControleDeJogo {
                 if (pTemp.isbTransponivel()) {
                     if(pTemp instanceof Coracao){
                         e.coracoesRestantes--;
-                        if(e.coracoesRestantes == 5){
+                        if(e.coracoesRestantes == 0){
                             bau.setbTransponivel(true);
                         }
                     }
