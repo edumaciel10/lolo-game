@@ -8,6 +8,8 @@ public class Fase1 extends Fase {
         
         this.coracoesRestantes = 6;
         Lolo lLolo = new Lolo();
+        lLolo.setVida(5);
+        
         lLolo.setPosicao(8, 6);
         this.add(lLolo);
 

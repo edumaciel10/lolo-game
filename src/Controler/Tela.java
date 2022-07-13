@@ -122,15 +122,34 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         }
 
         // Imprime ícones a direita
+        // @todo dividir em função
         try {
             Image newImage = Toolkit.getDefaultToolkit()
                     .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "loloBaixo.png");
+
             g2.drawImage(newImage,
                     13 * Consts.CELL_SIDE, 1 * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+
+            newImage = Toolkit.getDefaultToolkit()
+                    .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + lLolo.getVida()+ ".png");
+
+            g2.drawImage(newImage,
+                    13 * Consts.CELL_SIDE, 2 * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+
             newImage = Toolkit.getDefaultToolkit()
                     .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "menuTiro.png");
+
             g2.drawImage(newImage,
                     13 * Consts.CELL_SIDE, 3 * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+            
+            newImage = Toolkit.getDefaultToolkit()
+                .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + lLolo.getVida()+ ".png");
+                
+            g2.drawImage(newImage,
+                    13 * Consts.CELL_SIDE, 4 * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+
+            
+            
         } catch (IOException ex) {
             Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -223,7 +242,16 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     }
 
     public void proximaFase() {
+        Lolo loloAntigo = (Lolo) this.e.get(0);
+
         this.e = fases[indiceFaseAtual++];
+
+        Lolo loloNovo = (Lolo) this.e.get(0);
+
+        loloAntigo.setPosicao(loloNovo.getLinha(), loloNovo.getColuna());
+
+        this.e.set(0,loloAntigo);
+
         this.lLolo = (Lolo) this.e.get(0);
     }
     /**
