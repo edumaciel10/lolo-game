@@ -16,6 +16,14 @@ public class Fase1 extends Fase {
         p.setPosicao(0, 6);
         this.add(p);
 
+        Cobrinha c1 = new Cobrinha();
+        c1.setPosicao(6, 4);
+        this.add(c1);
+
+        Cobrinha c2 = new Cobrinha();
+        c2.setPosicao(6, 8);
+        this.add(c2);
+        
         adicionaMoitasBrancas();
         adicionaMoitasVerdes();
         adicionaCoracoes();
