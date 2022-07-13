@@ -24,6 +24,7 @@ public abstract class Elemento implements Serializable {
     protected Posicao pPosicao;
     protected boolean bTransponivel; /*Pode passar por cima?*/
     protected boolean bMortal;       /*Se encostar, o Bomberman morre?*/
+    protected boolean inimigo;
 
 
     protected Elemento(String sNomeImagePNG) {
