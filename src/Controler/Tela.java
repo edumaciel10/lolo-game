@@ -145,6 +145,10 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         if (!getBufferStrategy().contentsLost()) {
             getBufferStrategy().show();
         }
+
+        if(e.proximaFase) {
+            this.proximaFase();
+        }
     }
 
     public void go() {
@@ -218,6 +222,10 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         repaint();
     }
 
+    public void proximaFase() {
+        this.e = fases[indiceFaseAtual++];
+        this.lLolo = (Lolo) this.e.get(0);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -12,6 +12,7 @@ import Modelo.Coracao;
 import Modelo.Elemento;
 import Modelo.Fase;
 import Modelo.Lolo;
+import Modelo.Porta;
 import Auxiliar.Posicao;
 import java.util.ArrayList;
 
@@ -29,6 +30,8 @@ public class ControleDeJogo {
     public void processaTudo(Fase e) {
         Lolo lolo = (Lolo) e.get(0);
         Bau bau = (Bau) e.get(1);
+        Porta porta = (Porta) e.get(2);
+
         Elemento pTemp;
         for (int i = 2; i < e.size(); i++) {
             pTemp = e.get(i);
@@ -36,11 +39,24 @@ public class ControleDeJogo {
                 if (pTemp.isbTransponivel()) {
                     if(pTemp instanceof Coracao){
                         e.coracoesRestantes--;
-                        if(e.coracoesRestantes == 0){
-                            bau.setbTransponivel(true);
+                        if(e.coracoesRestantes == 5){
+                            bau.abrirComJoia();
+                            e.remove(pTemp);
                         }
                     }
-                    e.remove(pTemp);
+
+                    if(pTemp instanceof Bau && bau.aberto){
+                        bau.abrirSemJoia();
+                        // porta.abrir();
+                    }
+
+                    if(pTemp instanceof Porta && porta.aberto){
+                        e.proximaFase = true;
+                    }
+
+                    if(pTemp.isInimigo()) {
+                        e.remove(pTemp);
+                    }
                 }
             }
         }

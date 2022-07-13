@@ -2,10 +2,15 @@ package Modelo;
 
 public class Fase2 extends Fase {
     public Fase2() {
+        this.coracoesRestantes = 7;
         /*Cria e adiciona personagens*/
         Lolo lLolo = new Lolo();
         lLolo.setPosicao(8, 6);
         this.add(lLolo);
+
+        Bau b = new Bau();
+        b.setPosicao(3, 6);
+        this.add(b);
 
         Porta p = new Porta();
         p.setPosicao(0, 6);
