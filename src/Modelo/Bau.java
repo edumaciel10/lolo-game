@@ -14,9 +14,10 @@ public class Bau extends Elemento {
     private static final ImageIcon[] imagens = new ImageIcon[3];
 
     protected Bau() {
-        super(nomesImagens[0]); // começa fechado
+        super(null);
         this.bTransponivel = false; // não pode passar por cima
         criaImagens();
+        iImage = imagens[0]; // começa fechado
     }
 
     private void criaImagens() {
