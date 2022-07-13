@@ -13,6 +13,11 @@ public class Fase1 extends ArrayList<Elemento> {
         p.setPosicao(0, 6);
         this.add(p);
 
+        Bau b = new Bau();
+        b.setPosicao(3, 6   );
+        this.add(b);
+
+        
         adicionaMoitasBrancas();
         adicionaMoitasVerdes();
         adicionaCoracoes();
