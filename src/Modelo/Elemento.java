@@ -53,6 +53,14 @@ public abstract class Elemento implements Serializable {
         return bTransponivel;
     }
 
+    public boolean isInimigo() {
+        return inimigo;
+    }
+
+    public void setInimigo(boolean inimigo) {
+        this.inimigo = inimigo;
+    }
+
     public void setbTransponivel(boolean bTransponivel) {
         this.bTransponivel = bTransponivel;
     }

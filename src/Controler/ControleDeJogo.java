@@ -12,6 +12,7 @@ import Modelo.Coracao;
 import Modelo.Elemento;
 import Modelo.Fase;
 import Modelo.Lolo;
+import Modelo.Porta;
 import Auxiliar.Posicao;
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  */
 public class ControleDeJogo {
     public void desenhaTudo(ArrayList<Elemento> e) {
-        for (int i = 0; i < e.size(); i++) {
+        for (int i = e.size()-1; i >= 0 ; i--) {
             e.get(i).autoDesenho();
         }
     }
@@ -29,20 +30,37 @@ public class ControleDeJogo {
     public void processaTudo(Fase e) {
         Lolo lolo = (Lolo) e.get(0);
         Bau bau = (Bau) e.get(1);
+        Porta porta = (Porta) e.get(2);
+
         Elemento pTemp;
-        for (int i = 2; i < e.size(); i++) {
+        for (int i = 1; i < e.size(); i++) {
             pTemp = e.get(i);
             if (lolo.getPosicao().igual(pTemp.getPosicao())) {
                 if (pTemp.isbTransponivel()) {
                     if(pTemp instanceof Coracao){
                         e.coracoesRestantes--;
                         if(e.coracoesRestantes == 0){
-                            bau.setbTransponivel(true);
+                            bau.abrirComJoia();
                         }
+                        e.remove(pTemp);
                     }
-                    e.remove(pTemp);
+
+                    if(pTemp instanceof Bau && bau.aberto){
+                        bau.abrirSemJoia();
+                        // porta.abrir();
+                    }
+
+                    if(pTemp.isInimigo()) {
+                        e.remove(pTemp);
+                    }
                 }
             }
+            if(lolo.getPosicao().igual(porta.getPosicao())){
+                e.proximaFase = true;
+            }
+            
+
+                    
         }
     }
 
