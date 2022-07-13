@@ -10,7 +10,7 @@ import Auxiliar.Consts;
 import Modelo.Coracao;
 import Modelo.Elemento;
 import Modelo.Lolo;
-import auxiliar.Posicao;
+import Auxiliar.Posicao;
 import java.util.ArrayList;
 
 /**
@@ -31,7 +31,7 @@ public class ControleDeJogo {
             if(bBomberman.getPosicao().igual(pTemp.getPosicao()))
                 if(pTemp.isbTransponivel())
                     e.remove(pTemp);
-        }        
+        }
     }
     
     /*Retorna true se a posicao p é válida para Lolo com relacao a todos os personagens no array*/
