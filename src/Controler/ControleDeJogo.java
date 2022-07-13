@@ -47,7 +47,7 @@ public class ControleDeJogo {
 
                     if(pTemp instanceof Bau && bau.aberto){
                         bau.abrirSemJoia();
-                        // porta.abrir();
+                        porta.abrir();
                     }
 
                     if(pTemp.isInimigo()) {
@@ -55,12 +55,6 @@ public class ControleDeJogo {
                     }
                 }
             }
-            if(lolo.getPosicao().igual(porta.getPosicao())){
-                e.proximaFase = true;
-            }
-            
-
-                    
         }
     }
 
@@ -68,7 +62,13 @@ public class ControleDeJogo {
      * Retorna true se a posicao p é válida para Lolo com relacao a todos os
      * personagens no array
      */
-    public boolean ehPosicaoValida(ArrayList<Elemento> e, Posicao p) {
+    public boolean ehPosicaoValidaLolo(Fase e, Posicao p) {
+        // Colisao porta
+        Porta porta = (Porta) e.get(2);
+        if (p.igual(porta.getPosicao()) && porta.aberto) {
+            e.proximaFase = true;
+        }
+
         // Colisao com as paredes
         if (p.getColuna() == 0 || p.getColuna() >= Consts.RES - 1 || p.getLinha() == 0
                 || p.getLinha() >= Consts.RES - 1) {

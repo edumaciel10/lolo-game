@@ -198,7 +198,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             lLolo.moveRight();
         }
-        if (!cj.ehPosicaoValida(this.e, lLolo.getPosicao())) {
+        if (!cj.ehPosicaoValidaLolo(this.e, lLolo.getPosicao())) {
             lLolo.voltaAUltimaPosicao();
         }
 

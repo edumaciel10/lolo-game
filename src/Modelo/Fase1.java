@@ -1,4 +1,7 @@
 package Modelo;
+
+import Auxiliar.Posicao;
+
 public class Fase1 extends Fase {
     public Fase1() {
         /*Cria e adiciona personagens*/
@@ -15,6 +18,7 @@ public class Fase1 extends Fase {
         Porta p = new Porta();
         p.setPosicao(0, 6);
         this.add(p);
+        posicaoAbrePorta = new Posicao(1, 6);
 
         Cobrinha c1 = new Cobrinha();
         c1.setPosicao(6, 4);
@@ -23,6 +27,10 @@ public class Fase1 extends Fase {
         Cobrinha c2 = new Cobrinha();
         c2.setPosicao(6, 8);
         this.add(c2);
+
+        Cobrinha c3 = new Cobrinha();
+        c3.setPosicao(2, 2);
+        this.add(c3);
         
         adicionaMoitasBrancas();
         adicionaMoitasVerdes();
