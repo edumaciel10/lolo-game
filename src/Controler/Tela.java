@@ -46,7 +46,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     private Lolo lLolo = (Lolo) e.get(0);
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
-
+    private Estado estado = new Estado();
     /**
      * Creates new form tabuleiro
      */
@@ -71,6 +71,17 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
 
     public Graphics getGraphicsBuffer() {
         return g2;
+    }
+
+    public void atualizarEstado () {
+        estado.ultimoMovimento = lLolo.getUltimoMovimento();
+        estado.indiceFaseAtual = indiceFaseAtual;
+    }
+
+    public void carregarEstado (Estado novoEstado) {
+        indiceFaseAtual = novoEstado.indiceFaseAtual;
+        lLolo.setUltimoMovimento(novoEstado.ultimoMovimento);
+        this.fases[indiceFaseAtual] = this.e;
     }
 
     public void paint(Graphics gOld) {
@@ -190,6 +201,10 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 GZIPInputStream compactador = new GZIPInputStream(canoOut);
                 ObjectInputStream serializador = new ObjectInputStream(compactador);
                 this.e = (Fase) serializador.readObject();
+                Estado novoEstado = (Estado) serializador.readObject();
+
+                this.carregarEstado(novoEstado);
+
                 this.lLolo = (Lolo) this.e.get(0);
                 serializador.close();
             } catch (Exception ex) {
@@ -202,7 +217,11 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 FileOutputStream canoOut = new FileOutputStream(tanque);
                 GZIPOutputStream compactador = new GZIPOutputStream(canoOut);
                 ObjectOutputStream serializador = new ObjectOutputStream(compactador);
+
+                atualizarEstado();
+
                 serializador.writeObject(this.e);
+                serializador.writeObject(this.estado);
                 serializador.flush();
                 serializador.close();
             } catch (IOException ex) {
@@ -218,6 +237,9 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             lLolo.moveRight();
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             lLolo.atira(fases[indiceFaseAtual]);
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_T) {
+            lLolo.adicionaMunicoes(1);
         } else if (e.getKeyCode() == KeyEvent.VK_R) {
             // reiniciar fase
             this.lLolo.setVida(this.lLolo.getVida() - 1);
