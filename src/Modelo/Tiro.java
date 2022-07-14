@@ -15,7 +15,7 @@ public class Tiro extends Elemento {
     private static final byte CIMA = 1;
     private static final byte ESQUERDA = 2;
     private static final byte DIREITA = 3;
-    private byte direcao;
+    private final byte direcao;
 
     protected Tiro(byte direcao) {
         super("tiro.png");

@@ -15,24 +15,10 @@ import java.io.Serializable;
  *
  * @author junio
  */
-public class Caveira extends Elemento implements Serializable{
-    private int iContaIntervalos;
-    
+public class Caveira extends Inimigo implements Serializable{
     public Caveira() {
         super("caveira.png");
         this.bTransponivel = false;
-        this.iContaIntervalos = 0;
+        this.inimigo = true;
     }
-
-    public void autoDesenho() {
-        super.autoDesenho();
-
-        this.iContaIntervalos++;
-        if(this.iContaIntervalos == Consts.TIMER_BOMBA){
-            this.iContaIntervalos = 0;
-            Fogo f = new Fogo("fire.png");
-            f.setPosicao(pPosicao.getLinha(),pPosicao.getColuna()+1);
-            Desenho.getCenario().addPersonagem(f);
-        }
-    }    
 }

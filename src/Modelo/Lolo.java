@@ -29,24 +29,29 @@ public class Lolo extends Elemento {
 
     private static int vidas = 0;
 
+    private int municoes = 0;
+
     public Lolo() {
         super(null);
         criaImagens();
         iImage = imagens[0]; // começa virado pra baixo
     }
 
-    public void atira(Fase faseAtual) {
-        Tiro tiro = new Tiro(ultimoMovimento);
-        Posicao posTiro = new Posicao(1, 1);
-        switch (ultimoMovimento) {
-            case BAIXO -> posTiro.setPosicao(pPosicao.getLinha() + 1, pPosicao.getColuna());
-            case CIMA -> posTiro.setPosicao(pPosicao.getLinha() - 1, pPosicao.getColuna());
-            case ESQUERDA -> posTiro.setPosicao(pPosicao.getLinha(), pPosicao.getColuna() - 1);
-            case DIREITA -> posTiro.setPosicao(pPosicao.getLinha(), pPosicao.getColuna() + 1);
-        }
+    public void adicionaMunicoes(int quantidadeMunicoes) {
+        municoes += quantidadeMunicoes;
+    }
 
-        tiro.pPosicao = posTiro;
-        faseAtual.add(tiro);
+    public int getMunicoes() {
+        return municoes;
+    }
+
+    public void atira(Fase faseAtual) {
+        if (municoes > 0) {
+            Tiro tiro = new Tiro(ultimoMovimento);
+            tiro.pPosicao = new Posicao(pPosicao.getLinha(), pPosicao.getColuna());
+            faseAtual.add(tiro);
+            municoes--;
+        }
     }
 
     private void criaImagens() {

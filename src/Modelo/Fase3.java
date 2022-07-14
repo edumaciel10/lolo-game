@@ -24,12 +24,6 @@ public class Fase3 extends Fase {
         adicionaCoracoes();
     }
 
-    private void adicionaMoitaBranca(int linha, int coluna) {
-        MoitaAmarela ma1 = new MoitaAmarela();
-        ma1.setPosicao(linha, coluna);
-        this.add(ma1);
-    }
-
     private void adicionaMoitasBrancas() {
         adicionaMoitaBranca(1, 1);
         adicionaMoitaBranca(3, 1);
@@ -45,12 +39,6 @@ public class Fase3 extends Fase {
         adicionaMoitaBranca(4, 9);
         adicionaMoitaBranca(10, 10);
         adicionaMoitaBranca(9, 11);
-    }
-
-    private void adicionaMoitaVerde(int linha, int coluna) {
-        MoitaVerde mv1 = new MoitaVerde();
-        mv1.setPosicao(linha, coluna);
-        this.add(mv1);
     }
 
     private void adicionaMoitasVerdes() {
@@ -78,18 +66,12 @@ public class Fase3 extends Fase {
         adicionaMoitaVerde(11, 11);
     }
 
-    private void adicionaCoracao(int linha, int coluna) {
-        Coracao c = new Coracao();
-        c.setPosicao(linha, coluna);
-        this.add(c);
-    }
-
     private void adicionaCoracoes() {
-        adicionaCoracao(2, 1);
-        adicionaCoracao(11, 2);
-        adicionaCoracao(1, 8);
-        adicionaCoracao(11, 8);
-        adicionaCoracao(11, 9);
-        adicionaCoracao(1, 11);
+        adicionaCoracao(2, 1, 0);
+        adicionaCoracao(11, 2, 0);
+        adicionaCoracao(1, 8, 0);
+        adicionaCoracao(11, 8, 0);
+        adicionaCoracao(11, 9, 0);
+        adicionaCoracao(1, 11, 0);
     }
 }

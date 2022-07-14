@@ -7,12 +7,7 @@
 package Controler;
 
 import Auxiliar.Consts;
-import Modelo.Bau;
-import Modelo.Coracao;
-import Modelo.Elemento;
-import Modelo.Fase;
-import Modelo.Lolo;
-import Modelo.Porta;
+import Modelo.*;
 import Auxiliar.Posicao;
 import java.util.ArrayList;
 
@@ -22,9 +17,10 @@ import java.util.ArrayList;
  */
 public class ControleDeJogo {
     public void desenhaTudo(ArrayList<Elemento> e) {
-        for (int i = e.size()-1; i >= 0 ; i--) {
+        for (int i = 1; i < e.size() ; i++) {
             e.get(i).autoDesenho();
         }
+        e.get(0).autoDesenho();
     }
 
     public void processaTudo(Fase e) {
@@ -35,6 +31,18 @@ public class ControleDeJogo {
         Elemento pTemp;
         for (int i = 1; i < e.size(); i++) {
             pTemp = e.get(i);
+            if (pTemp instanceof Tiro) {
+                for (int j = 1; j < e.size(); j++) {
+                    Elemento pTemp2 = e.get(j);
+                    if (pTemp2 != pTemp) {
+                        if (pTemp2.isInimigo()) {
+                            if (pTemp.getPosicao().igual(pTemp2.getPosicao())) {
+                                ((Inimigo) pTemp2).morrer(e);
+                            }
+                        }
+                    }
+                }
+            }
             if (lolo.getPosicao().igual(pTemp.getPosicao())) {
                 if (pTemp.isbTransponivel()) {
                     if(pTemp instanceof Coracao){
@@ -42,6 +50,7 @@ public class ControleDeJogo {
                         if(e.coracoesRestantes == 0){
                             bau.abrirComJoia();
                         }
+                        lolo.adicionaMunicoes(((Coracao) pTemp).getQuantidadeMunicoes());
                         e.remove(pTemp);
                     }
 
