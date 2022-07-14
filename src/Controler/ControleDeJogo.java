@@ -35,11 +35,13 @@ public class ControleDeJogo {
                 for (int j = 1; j < e.size(); j++) {
                     Elemento pTemp2 = e.get(j);
                     if (pTemp2 != pTemp) {
-                        if (pTemp2.isInimigo()) {
-                            if (pTemp.getPosicao().igual(pTemp2.getPosicao())) {
+                        if (pTemp.getPosicao().igual(pTemp2.getPosicao())) {
+                            if (pTemp2.isInimigo()) {
                                 ((Inimigo) pTemp2).morrer(e);
                             }
+                            e.remove(pTemp);
                         }
+
                     }
                 }
             }

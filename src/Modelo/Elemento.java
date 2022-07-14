@@ -31,6 +31,7 @@ public abstract class Elemento implements Serializable {
         this.pPosicao = new Posicao(1, 1);
         this.bTransponivel = true;
         this.bMortal = false;
+        this.inimigo = false;
         if (sNomeImagePNG == null) {
             return;
         }
