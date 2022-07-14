@@ -12,7 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.Serializable;
 
 /**
  *
@@ -25,7 +24,15 @@ public class Lolo extends Elemento {
     private static final byte CIMA = 1;
     private static final byte ESQUERDA = 2;
     private static final byte DIREITA = 3;
-    private static byte ultimoMovimento = BAIXO;
+    private byte ultimoMovimento = BAIXO;
+
+    public byte getUltimoMovimento() {
+        return ultimoMovimento;
+    }
+
+    public void setUltimoMovimento(byte ultimoMovimento) {
+        this.ultimoMovimento = ultimoMovimento;
+    }
 
     private static int vidas = 0;
 
