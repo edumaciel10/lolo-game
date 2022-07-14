@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 public class Porta extends Elemento {
-    public boolean aberto = false;
+    public boolean aberto = true;
     private static final String[] nomesImagens = {"porta.png", "porta_aberta.png"};
     private static final ImageIcon[] imagens = new ImageIcon[2];
 

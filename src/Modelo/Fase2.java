@@ -5,7 +5,10 @@ import Auxiliar.Posicao;
 public class Fase2 extends Fase {
     public Fase2() {
         /*Cria e adiciona personagens*/
+        montaTudo();
+    }
 
+    public void montaTudo() {
         this.coracoesRestantes = 7;
         Lolo lLolo = new Lolo();
         lLolo.setPosicao(11, 11);
@@ -35,7 +38,6 @@ public class Fase2 extends Fase {
         adicionaMoitasVerdes();
         adicionaCoracoes();
     }
-
     private void adicionaMoitaBranca(int linha, int coluna) {
         MoitaAmarela ma1 = new MoitaAmarela();
         ma1.setPosicao(linha, coluna);

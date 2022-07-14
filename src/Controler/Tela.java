@@ -54,7 +54,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         Desenho.setCenario(this);
         initComponents();
         this.addMouseListener(this); /* mouse */
-
+        this.lLolo.setVida(5);
         this.addKeyListener(this); /* teclado */
         /* Cria a janela do tamanho do tabuleiro + insets (bordas) da janela */
         this.setSize((Consts.RES + 1) * Consts.CELL_SIDE + getInsets().left + getInsets().right,
@@ -218,6 +218,23 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             lLolo.moveRight();
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             lLolo.atira(fases[indiceFaseAtual]);
+        } else if (e.getKeyCode() == KeyEvent.VK_R) {
+            // reiniciar fase
+            this.lLolo.setVida(this.lLolo.getVida() - 1);
+            int vidasAtual = this.lLolo.getVida();
+            if(indiceFaseAtual == 0) {
+                this.fases[indiceFaseAtual] = new Fase1();
+                reiniciaFase(vidasAtual);
+            }
+            if(indiceFaseAtual == 1) {
+                this.fases[indiceFaseAtual] = new Fase2();
+                reiniciaFase(vidasAtual);
+            }
+            if(indiceFaseAtual == 2) {
+                this.fases[indiceFaseAtual] = new Fase3();
+                reiniciaFase(vidasAtual);
+            }
+            return;
         }
 
 
@@ -229,6 +246,15 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 + (lLolo.getPosicao().getLinha()));
 
         // repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
+    }
+
+    private void reiniciaFase(int vidasAtual) {
+        this.e = this.fases[indiceFaseAtual];
+        
+        Lolo novo = (Lolo) this.e.get(0);
+        novo.setVida(vidasAtual);
+        this.lLolo = novo;
+        this.e.set(0, novo);
     }
 
     public void mousePressed(MouseEvent e) {

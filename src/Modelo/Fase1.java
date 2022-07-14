@@ -5,11 +5,14 @@ import Auxiliar.Posicao;
 public class Fase1 extends Fase {
     public Fase1() {
         /*Cria e adiciona personagens*/
-        
+        montaTudo();
+    }
+
+    public void montaTudo() {
         this.coracoesRestantes = 6;
+        this.clear();
         Lolo lLolo = new Lolo();
-        lLolo.setVida(5);
-        
+
         lLolo.setPosicao(8, 6);
         this.add(lLolo);
 
