@@ -2,11 +2,19 @@ package Modelo;
 
 public class Fase3 extends Fase {
     public Fase3() {
+        montaTudo();
+    }
+
+    public void montaTudo() {
         /*Cria e adiciona personagens*/
         Lolo lLolo = new Lolo();
         lLolo.setPosicao(8, 6);
         this.add(lLolo);
-
+        
+        Bau b = new Bau();
+        b.setPosicao(10, 1);
+        this.add(b);
+        
         Porta p = new Porta();
         p.setPosicao(0, 6);
         this.add(p);
