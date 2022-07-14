@@ -41,6 +41,10 @@ public class Lolo extends Elemento {
         municoes += quantidadeMunicoes;
     }
 
+    public void setMunicoes(int municoes) {
+        this.municoes = municoes;
+    }
+
     public int getMunicoes() {
         return municoes;
     }
@@ -110,7 +114,9 @@ public class Lolo extends Elemento {
     }
 
     public void setVida(int vida) {
-        vidas = vida;
+        if(vida >= 0) {
+            vidas = vida;
+        }
     }
 
     public int getVida() {

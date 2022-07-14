@@ -222,6 +222,10 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             // reiniciar fase
             this.lLolo.setVida(this.lLolo.getVida() - 1);
             int vidasAtual = this.lLolo.getVida();
+            if(vidasAtual == 0 ) {
+                // game over
+                return;
+            }
             if(indiceFaseAtual == 0) {
                 this.fases[indiceFaseAtual] = new Fase1();
                 reiniciaFase(vidasAtual);
@@ -252,7 +256,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         this.e = this.fases[indiceFaseAtual];
         
         Lolo novo = (Lolo) this.e.get(0);
-        novo.setVida(vidasAtual);
+        novo.setMunicoes(0);
         this.lLolo = novo;
         this.e.set(0, novo);
     }
@@ -281,8 +285,8 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         loloAntigo.setPosicao(loloNovo.getLinha(), loloNovo.getColuna());
 
         this.e.set(0,loloAntigo);
-
         this.lLolo = (Lolo) this.e.get(0);
+        this.lLolo.setMunicoes(0);
     }
     /**
      * This method is called from within the constructor to initialize the form.
