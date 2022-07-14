@@ -196,7 +196,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             this.e.clear();
         } else if (e.getKeyCode() == KeyEvent.VK_L) {
             try {
-                File tanque = new File("c:\\temp\\POO.zip");
+                File tanque = new File("./POO.zip");
                 FileInputStream canoOut = new FileInputStream(tanque);
                 GZIPInputStream compactador = new GZIPInputStream(canoOut);
                 ObjectInputStream serializador = new ObjectInputStream(compactador);
@@ -212,7 +212,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             }
         } else if (e.getKeyCode() == KeyEvent.VK_S) {
             try {
-                File tanque = new File("c:\\temp\\POO.zip");
+                File tanque = new File("./POO.zip");
                 tanque.createNewFile();
                 FileOutputStream canoOut = new FileOutputStream(tanque);
                 GZIPOutputStream compactador = new GZIPOutputStream(canoOut);
