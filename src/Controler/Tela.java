@@ -143,7 +143,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                     13 * Consts.CELL_SIDE, 3 * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
             
             newImage = Toolkit.getDefaultToolkit()
-                .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + lLolo.getVida()+ ".png");
+                .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + lLolo.getMunicoes()+ ".png");
                 
             g2.drawImage(newImage,
                     13 * Consts.CELL_SIDE, 4 * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
