@@ -248,7 +248,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     public void proximaFase() {
         Lolo loloAntigo = (Lolo) this.e.get(0);
 
-        this.e = fases[indiceFaseAtual++];
+        this.e = fases[++indiceFaseAtual];
 
         Lolo loloNovo = (Lolo) this.e.get(0);
 
