@@ -27,4 +27,16 @@ public abstract class Fase extends ArrayList<Elemento> {
         c.setPosicao(linha, coluna);
         this.add(c);
     }
+
+    protected void adicionarAgua(int linha, int coluna) {
+        Agua a = new Agua();
+        a.setPosicao(linha, coluna);
+        this.add(a);
+    }
+
+    protected void adicionarCaixa(int linha, int coluna) {
+        Caixa c = new Caixa();
+        c.setPosicao(linha, coluna);
+        this.add(c);
+    }
 }
