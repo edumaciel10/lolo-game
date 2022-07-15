@@ -14,6 +14,7 @@ import Modelo.*;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 
+import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -21,12 +22,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -248,6 +244,25 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             // reiniciar fase
             reiniciaFase();
             return;
+        } else if (e.getKeyCode() == KeyEvent.VK_I) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("."));
+            int retorno = fileChooser.showOpenDialog(null);
+            if (retorno == JFileChooser.APPROVE_OPTION) {
+                File aqruivo = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                try {
+                    FileInputStream inputStream = new FileInputStream(aqruivo);
+                    ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+                    Elemento elemento = (Elemento) objectInputStream.readObject();
+                    addPersonagem(elemento);
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
 
 

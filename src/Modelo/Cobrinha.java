@@ -1,7 +1,7 @@
 package Modelo;
 
 public class Cobrinha extends Inimigo {
-    protected Cobrinha() {
+    public Cobrinha() {
         super("cobrinha.png");
         this.bTransponivel = false;
         this.inimigo = true;
