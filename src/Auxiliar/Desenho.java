@@ -20,7 +20,7 @@ public class Desenho implements Serializable {
         jCenario = umJCenario;
     }
 
-    public static Tela getCenario() {
+    public static Tela  getCenario() {
         return jCenario;
     }
 

@@ -17,8 +17,12 @@ public class Fase3 extends Fase {
         this.add(b);
 
         Porta p = new Porta();
-        p.setPosicao(0, 6);
+        p.setPosicao(0, 7);
         this.add(p);
+
+        Tatu t = new Tatu(this);
+        t.setPosicao(1, 1);
+        this.add(t);
 
         adicionaMoitasBrancas();
         adicionaMoitasVerdes();
@@ -28,12 +32,12 @@ public class Fase3 extends Fase {
     }
 
     private void adicionaMoitasBrancas() {
-        adicionaMoitaBranca(1, 3);
-        adicionaMoitaBranca(2, 3);
+        adicionaMoitaBranca(1, 4);
         adicionaMoitaBranca(2, 4);
-        adicionaMoitaBranca(1, 8);
+        adicionaMoitaBranca(2, 5);
+        adicionaMoitaBranca(1, 9);
+        adicionaMoitaBranca(2, 9);
         adicionaMoitaBranca(2, 8);
-        adicionaMoitaBranca(2, 7);
         adicionaMoitaBranca(4, 2);
         adicionaMoitaBranca(4, 3);
         adicionaMoitaBranca(4, 4);
@@ -44,20 +48,20 @@ public class Fase3 extends Fase {
     }
 
     private void adicionaMoitasVerdes() {
-        adicionaMoitaVerde(1, 4);
         adicionaMoitaVerde(1, 5);
-        adicionaMoitaVerde(2, 5);
+        adicionaMoitaVerde(1, 6);
+        adicionaMoitaVerde(2, 6);
         adicionaMoitaVerde(4, 1);
         adicionaMoitaVerde(4, 5);
         adicionaMoitaVerde(4, 6);
         adicionaMoitaVerde(4, 7);
-        adicionaMoitaVerde(4, 8);
+        adicionaMoitaVerde(4, 9);
         adicionaMoitaVerde(4, 10);
-        adicionaMoitaVerde(4, 11);
         adicionaMoitaVerde(8, 9);
         adicionaMoitaVerde(11, 9);
         adicionaMoitaVerde(10, 5);
         adicionaMoitaVerde(9, 6);
+        adicionaMoitaVerde(5, 6);
     }
 
     private void adicionaCoracoes() {
@@ -65,7 +69,7 @@ public class Fase3 extends Fase {
         adicionaCoracao(5, 3, 0);
         adicionaCoracao(8, 2, 0);
         adicionaCoracao(9, 10, 0);
-        adicionaCoracao(1, 7, 0);
+        adicionaCoracao(1, 8, 0);
         adicionaCoracao(3, 3, 0);
     }
 

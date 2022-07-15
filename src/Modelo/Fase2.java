@@ -26,11 +26,11 @@ public class Fase2 extends Fase {
         c1.setPosicao(7, 5);
         this.add(c1);
 
-        Caveira ca1 = new Caveira();
+        Caveira ca1 = new Caveira(this);
         ca1.setPosicao(3, 5);
         this.add(ca1);
 
-        Caveira ca2 = new Caveira();
+        Caveira ca2 = new Caveira(this);
         ca2.setPosicao(6, 8);
         this.add(ca2);
 

@@ -7,6 +7,7 @@
 package Controler;
 
 import Auxiliar.Consts;
+import Auxiliar.Desenho;
 import Modelo.*;
 import Auxiliar.Posicao;
 import java.util.ArrayList;
@@ -52,10 +53,24 @@ public class ControleDeJogo {
                 }
             }
             if (lolo.getPosicao().igual(pTemp.getPosicao())) {
+                if (pTemp instanceof Tatu) {
+                    Desenho.getCenario().reiniciaFase();
+                }
+                if (pTemp instanceof Caveira) {
+                    if (((Caveira) pTemp).isMovendo()) {
+                        Desenho.getCenario().reiniciaFase();
+                    }
+                }
+
                 if (pTemp.isbTransponivel()) {
                     if(pTemp instanceof Coracao){
                         e.coracoesRestantes--;
                         if(e.coracoesRestantes == 0){
+                            for (Elemento elemento : e) {
+                                if (elemento instanceof Caveira) {
+                                    ((Caveira) elemento).setMovendo(true);
+                                }
+                            }
                             bau.abrirComJoia();
                         }
                         lolo.adicionaMunicoes(((Coracao) pTemp).getQuantidadeMunicoes());
@@ -65,6 +80,11 @@ public class ControleDeJogo {
                     if(pTemp instanceof Bau && bau.aberto){
                         bau.abrirSemJoia();
                         porta.abrir();
+                        for (Elemento elemento : e) {
+                            if (elemento instanceof Inimigo || elemento instanceof Ovo) {
+                                e.remove(elemento);
+                            }
+                        }
                     }
 
                     if(pTemp.isInimigo()) {
