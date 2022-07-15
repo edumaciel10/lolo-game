@@ -95,29 +95,29 @@ public class ControleDeJogo {
         Elemento pTemp;
         for (int i = 1; i < e.size(); i++) {
             pTemp = e.get(i);
-            if (pTemp instanceof Ovo) {
+            if (pTemp instanceof Empurravel) {
                 if (pTemp.getPosicao().igual(p)) {
                     int linha = pTemp.getPosicao().getLinha();
                     int coluna = pTemp.getPosicao().getColuna();
                     switch (((Lolo)e.get(0)).getUltimoMovimento()) {
                         case Lolo.BAIXO:
                             if (!ocupado(e, linha + 1, coluna)) {
-                                ((Ovo) pTemp).moveDown();
+                                pTemp.moveDown();
                             }
                             break;
                         case Lolo.CIMA:
                             if (!ocupado(e, linha - 1, coluna)) {
-                                ((Ovo) pTemp).moveUp();
+                                pTemp.moveUp();
                             }
                             break;
                         case Lolo.ESQUERDA:
                             if (!ocupado(e, linha, coluna - 1)) {
-                                ((Ovo) pTemp).moveLeft();
+                                pTemp.moveLeft();
                             }
                             break;
                         case Lolo.DIREITA:
                             if (!ocupado(e, linha, coluna + 1)) {
-                                ((Ovo) pTemp).moveRight();
+                                pTemp.moveRight();
                             }
                             break;
                     }
