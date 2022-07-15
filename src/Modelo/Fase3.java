@@ -3,6 +3,7 @@ package Modelo;
 public class Fase3 extends Fase {
     public Fase3() {
         montaTudo();
+        coracoesRestantes = 6;
     }
 
     public void montaTudo() {

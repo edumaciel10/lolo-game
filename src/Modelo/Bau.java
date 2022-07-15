@@ -15,7 +15,7 @@ public class Bau extends Elemento {
 
     protected Bau() {
         super(null);
-        this.bTransponivel = false; // não pode passar por cima
+        this.bTransponivel = true;
         criaImagens();
         iImage = imagens[0]; // começa fechado
     }
