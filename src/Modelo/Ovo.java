@@ -1,6 +1,7 @@
 package Modelo;
 
 import Auxiliar.Consts;
+import Auxiliar.Desenho;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,12 +9,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Ovo extends Empurravel {
-    public boolean aberto = false;
     private static final String[] nomesImagens = {"ovo.png", "ovo_rachado.png"};
     private static final ImageIcon[] imagens = new ImageIcon[2];
 
-    protected Ovo() {
+    private String tipoInimigo;
+
+    protected Ovo(String tipoInimigo) {
         super(null);
+        this.tipoInimigo = tipoInimigo;
         criaImagens();
         iImage = imagens[0]; // começa normal
         bTransponivel = false;
@@ -32,5 +35,36 @@ public class Ovo extends Empurravel {
                 e.printStackTrace();
             }
         }
+    }
+
+    private int n = 0;
+
+    @Override
+    public void autoDesenho() {
+        n++;
+        if (n > 40) {
+            iImage = imagens[1];
+        }
+        if (n > 65) {
+            Desenho.getCenario().removePersonagem(this);
+            switch (tipoInimigo) {
+                case "Modelo.Cobrinha":
+                    Cobrinha c = new Cobrinha();
+                    c.setPosicao(pPosicao.getLinha(), pPosicao.getColuna());
+                    Desenho.getCenario().addPersonagem(c);
+                    break;
+                case "Modelo.Caveira":
+                    Caveira ca = new Caveira(Desenho.getCenario().getFase());
+                    ca.setPosicao(pPosicao.getLinha(), pPosicao.getColuna());
+                    Desenho.getCenario().addPersonagem(ca);
+                    break;
+                case "Modelo.Tatu":
+                    Tatu t = new Tatu(Desenho.getCenario().getFase());
+                    t.setPosicao(pPosicao.getLinha(), pPosicao.getColuna());
+                    Desenho.getCenario().addPersonagem(t);
+                    break;
+            }
+        }
+        super.autoDesenho();
     }
 }

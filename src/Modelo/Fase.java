@@ -1,5 +1,7 @@
 package Modelo;
 
+import Auxiliar.Posicao;
+
 import java.util.ArrayList;
 
 public abstract class Fase extends ArrayList<Elemento> {
@@ -38,5 +40,15 @@ public abstract class Fase extends ArrayList<Elemento> {
         Caixa c = new Caixa();
         c.setPosicao(linha, coluna);
         this.add(c);
+    }
+
+    public boolean posicaoEhValida(int linha, int coluna) {
+        Posicao p = new Posicao(linha, coluna);
+        for (int i = 1; i < this.size(); i++) {
+            if (this.get(i).getPosicao().igual(p)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

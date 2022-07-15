@@ -61,6 +61,10 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
     }
 
+    public Fase getFase() {
+        return fases[indiceFaseAtual];
+    }
+
     public void addPersonagem(Elemento umPersonagem) {
         e.add(umPersonagem);
     }
@@ -242,24 +246,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             lLolo.adicionaMunicoes(1);
         } else if (e.getKeyCode() == KeyEvent.VK_R) {
             // reiniciar fase
-            this.lLolo.setVida(this.lLolo.getVida() - 1);
-            int vidasAtual = this.lLolo.getVida();
-            if(vidasAtual == 0 ) {
-                // game over
-                return;
-            }
-            if(indiceFaseAtual == 0) {
-                this.fases[indiceFaseAtual] = new Fase1();
-                reiniciaFase(vidasAtual);
-            }
-            if(indiceFaseAtual == 1) {
-                this.fases[indiceFaseAtual] = new Fase2();
-                reiniciaFase(vidasAtual);
-            }
-            if(indiceFaseAtual == 2) {
-                this.fases[indiceFaseAtual] = new Fase3();
-                reiniciaFase(vidasAtual);
-            }
+            reiniciaFase();
             return;
         }
 
@@ -272,6 +259,28 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                 + (lLolo.getPosicao().getLinha()));
 
         // repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
+    }
+
+    public void reiniciaFase() {
+        this.lLolo.setVida(this.lLolo.getVida() - 1);
+        int vidasAtual = this.lLolo.getVida();
+        if(vidasAtual == 0 ) {
+            // game over
+            return;
+        }
+        if(indiceFaseAtual == 0) {
+            this.fases[indiceFaseAtual] = new Fase1();
+            reiniciaFase(vidasAtual);
+        }
+        if(indiceFaseAtual == 1) {
+            this.fases[indiceFaseAtual] = new Fase2();
+            reiniciaFase(vidasAtual);
+        }
+        if(indiceFaseAtual == 2) {
+            this.fases[indiceFaseAtual] = new Fase3();
+            reiniciaFase(vidasAtual);
+        }
+        return;
     }
 
     private void reiniciaFase(int vidasAtual) {
