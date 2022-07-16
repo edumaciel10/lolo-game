@@ -20,9 +20,7 @@ import Modelo.Fases.Fase3;
 import Modelo.Lolo.Lolo;
 
 import javax.swing.*;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -46,6 +44,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     private Fase e = fases[indiceFaseAtual];
     private Lolo lLolo = (Lolo) e.get(0);
     private ControleDeJogo cj = new ControleDeJogo();
+    public boolean gameOver = false;
     private Graphics g2;
     private Estado estado = new Estado();
     /**
@@ -89,10 +88,16 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         this.fases[indiceFaseAtual] = this.e;
     }
 
+
     public void paint(Graphics gOld) {
         Graphics g = this.getBufferStrategy().getDrawGraphics();
         /* Criamos um contexto gráfico */
         g2 = g.create(getInsets().left, getInsets().top, getWidth() - getInsets().right, getHeight() - getInsets().top);
+        if (gameOver) {
+            gameOver(g);
+            return;
+        }
+
         /************* Desenha cenário de fundo **************/
         for (int i = 0; i < Consts.RES; i++) {
             for (int j = 0; j < Consts.RES + 1; j++) {
@@ -186,6 +191,29 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         }
     }
 
+    private void gameOver(Graphics g) {
+        for (int i = 0; i < Consts.RES; i++) {
+            for (int j = 0; j < Consts.RES + 1; j++) {
+                try {
+                    Image newImage = Toolkit.getDefaultToolkit()
+                                .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "black.png");
+                    g2.drawImage(newImage,
+                            j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+                } catch (IOException ex) {
+                    Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        g.setFont(new Font("Arial", Font.PLAIN, 50));
+        g.setColor(Color.WHITE);
+        g.drawString("GAME OVER", 5 * Consts.CELL_SIDE, 5 * Consts.CELL_SIDE);
+        g.dispose();
+        g2.dispose();
+        if (!getBufferStrategy().contentsLost()) {
+            getBufferStrategy().show();
+        }
+    }
+
     public void go() {
         TimerTask task = new TimerTask() {
             public void run() {
@@ -200,38 +228,9 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         if (e.getKeyCode() == KeyEvent.VK_C) {
             this.e.clear();
         } else if (e.getKeyCode() == KeyEvent.VK_L) {
-            try {
-                File tanque = new File("./POO.zip");
-                FileInputStream canoOut = new FileInputStream(tanque);
-                GZIPInputStream compactador = new GZIPInputStream(canoOut);
-                ObjectInputStream serializador = new ObjectInputStream(compactador);
-                this.e = (Fase) serializador.readObject();
-                Estado novoEstado = (Estado) serializador.readObject();
-
-                this.carregarEstado(novoEstado);
-
-                this.lLolo = (Lolo) this.e.get(0);
-                serializador.close();
-            } catch (Exception ex) {
-                Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            carregaEstado();
         } else if (e.getKeyCode() == KeyEvent.VK_S) {
-            try {
-                File tanque = new File("./POO.zip");
-                tanque.createNewFile();
-                FileOutputStream canoOut = new FileOutputStream(tanque);
-                GZIPOutputStream compactador = new GZIPOutputStream(canoOut);
-                ObjectOutputStream serializador = new ObjectOutputStream(compactador);
-
-                atualizarEstado();
-
-                serializador.writeObject(this.e);
-                serializador.writeObject(this.estado);
-                serializador.flush();
-                serializador.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            salvaEstado();
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
             lLolo.moveUp();
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -250,24 +249,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             reiniciaFase();
             return;
         } else if (e.getKeyCode() == KeyEvent.VK_I) {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setCurrentDirectory(new File("."));
-            int retorno = fileChooser.showOpenDialog(null);
-            if (retorno == JFileChooser.APPROVE_OPTION) {
-                File aqruivo = new File(fileChooser.getSelectedFile().getAbsolutePath());
-                try {
-                    FileInputStream inputStream = new FileInputStream(aqruivo);
-                    ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-                    Elemento elemento = (Elemento) objectInputStream.readObject();
-                    addPersonagem(elemento);
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                }
-            }
+            leElementoDeArquivo();
         }
 
 
@@ -281,11 +263,69 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         // repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
     }
 
+    private void salvaEstado() {
+        try {
+            File tanque = new File("./POO.zip");
+            tanque.createNewFile();
+            FileOutputStream canoOut = new FileOutputStream(tanque);
+            GZIPOutputStream compactador = new GZIPOutputStream(canoOut);
+            ObjectOutputStream serializador = new ObjectOutputStream(compactador);
+
+            atualizarEstado();
+
+            serializador.writeObject(this.e);
+            serializador.writeObject(this.estado);
+            serializador.flush();
+            serializador.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void carregaEstado() {
+        try {
+            File tanque = new File("./POO.zip");
+            FileInputStream canoOut = new FileInputStream(tanque);
+            GZIPInputStream compactador = new GZIPInputStream(canoOut);
+            ObjectInputStream serializador = new ObjectInputStream(compactador);
+            this.e = (Fase) serializador.readObject();
+            Estado novoEstado = (Estado) serializador.readObject();
+
+            this.carregarEstado(novoEstado);
+
+            this.lLolo = (Lolo) this.e.get(0);
+            serializador.close();
+        } catch (Exception ex) {
+            Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void leElementoDeArquivo() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("."));
+        int retorno = fileChooser.showOpenDialog(null);
+        if (retorno == JFileChooser.APPROVE_OPTION) {
+            File aqruivo = new File(fileChooser.getSelectedFile().getAbsolutePath());
+            try {
+                FileInputStream inputStream = new FileInputStream(aqruivo);
+                ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+                Elemento elemento = (Elemento) objectInputStream.readObject();
+                addPersonagem(elemento);
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
     public void reiniciaFase() {
         this.lLolo.setVida(this.lLolo.getVida() - 1);
         int vidasAtual = this.lLolo.getVida();
-        if(vidasAtual == 0 ) {
-            // game over
+        if(vidasAtual <= 0 ) {
+            gameOver = true;
             return;
         }
         if(indiceFaseAtual == 0) {
