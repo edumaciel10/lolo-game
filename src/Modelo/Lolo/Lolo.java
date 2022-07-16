@@ -3,10 +3,12 @@
  * and open the template in the editor.
  */
 
-package Modelo;
+package Modelo.Lolo;
 
 import Auxiliar.Consts;
 import Auxiliar.Posicao;
+import Modelo.Elemento;
+import Modelo.Fases.Fase;
 
 import javax.swing.*;
 import java.awt.*;

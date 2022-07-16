@@ -13,6 +13,11 @@ package Controler;
 import Modelo.*;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
+import Modelo.Fases.Fase;
+import Modelo.Fases.Fase1;
+import Modelo.Fases.Fase2;
+import Modelo.Fases.Fase3;
+import Modelo.Lolo.Lolo;
 
 import javax.swing.*;
 import java.awt.Graphics;

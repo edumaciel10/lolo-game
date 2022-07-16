@@ -1,8 +1,9 @@
-package Modelo;
+package Modelo.Cenario;
 
 import javax.swing.*;
 
 import Auxiliar.Consts;
+import Modelo.Elemento;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,7 +14,7 @@ public class Bau extends Elemento {
     private static final String[] nomesImagens = {"bau.png", "bau_aberto_com_joia.png", "bau_aberto_sem_joia.png"};
     private static final ImageIcon[] imagens = new ImageIcon[3];
 
-    protected Bau() {
+    public Bau() {
         super(null);
         this.bTransponivel = true;
         criaImagens();

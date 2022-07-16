@@ -1,6 +1,8 @@
-package Modelo;
+package Modelo.Cenario;
 
-public class Empurravel extends Elemento  {
+import Modelo.Elemento;
+
+public class Empurravel extends Elemento {
     protected Empurravel(String sNomeImagePNG) {
         super(sNomeImagePNG);
     }

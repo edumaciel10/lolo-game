@@ -1,7 +1,7 @@
-package Modelo;
+package Modelo.Cenario;
 
 public class Caixa extends Empurravel {
-    protected Caixa() {
+    public Caixa() {
         super("caixa.png");
         this.bTransponivel = false;
     }

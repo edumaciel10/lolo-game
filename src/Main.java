@@ -5,7 +5,7 @@
 
 
 import Controler.Tela;
-import Modelo.Cobrinha;
+import Modelo.Inimigos.Cobrinha;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

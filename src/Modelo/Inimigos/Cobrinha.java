@@ -1,4 +1,4 @@
-package Modelo;
+package Modelo.Inimigos;
 
 public class Cobrinha extends Inimigo {
     public Cobrinha() {
