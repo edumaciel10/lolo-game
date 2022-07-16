@@ -15,6 +15,7 @@ import Modelo.Cenario.Coracao;
 import Modelo.Cenario.Empurravel;
 import Modelo.Cenario.Porta;
 import Modelo.Fases.Fase;
+import Modelo.Fases.Fase3;
 import Modelo.Inimigos.Caveira;
 import Modelo.Inimigos.Inimigo;
 import Modelo.Inimigos.Ovo;
@@ -127,7 +128,11 @@ public class ControleDeJogo {
     public boolean ehPosicaoValidaLolo(Fase e, Posicao p) {
         // Colisao porta
         Porta porta = (Porta) e.get(2);
+
         if (p.igual(porta.getPosicao()) && porta.aberto) {
+            if( e instanceof Fase3 ) {
+                Tela.winGame = true;
+            }
             e.proximaFase = true;
         }
 

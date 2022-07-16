@@ -45,6 +45,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     private Lolo lLolo = (Lolo) e.get(0);
     private ControleDeJogo cj = new ControleDeJogo();
     public boolean gameOver = false;
+    public static boolean winGame = false;
     private Graphics g2;
     private Estado estado = new Estado();
     /**
@@ -93,6 +94,12 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         Graphics g = this.getBufferStrategy().getDrawGraphics();
         /* Criamos um contexto gráfico */
         g2 = g.create(getInsets().left, getInsets().top, getWidth() - getInsets().right, getHeight() - getInsets().top);
+
+        if(winGame) {
+            win(g);
+            return;
+        }
+
         if (gameOver) {
             gameOver(g);
             return;
@@ -207,6 +214,36 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         g.setFont(new Font("Arial", Font.PLAIN, 50));
         g.setColor(Color.WHITE);
         g.drawString("GAME OVER", 5 * Consts.CELL_SIDE, 5 * Consts.CELL_SIDE);
+        g.setFont(new Font("Arial", Font.PLAIN, 40));
+        g.drawString("Eduardo Maciel de Matos", 240, 7 * Consts.CELL_SIDE);
+        g.drawString("João Otávio da Silva"   , 295, 8 * Consts.CELL_SIDE);
+        g.dispose();
+        g2.dispose();
+        if (!getBufferStrategy().contentsLost()) {
+            getBufferStrategy().show();
+        }
+    }
+
+
+    private void win(Graphics g) {
+        for (int i = 0; i < Consts.RES; i++) {
+            for (int j = 0; j < Consts.RES + 1; j++) {
+                try {
+                    Image newImage = Toolkit.getDefaultToolkit()
+                                .getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "black.png");
+                    g2.drawImage(newImage,
+                            j * Consts.CELL_SIDE, i * Consts.CELL_SIDE, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+                } catch (IOException ex) {
+                    Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        g.setFont(new Font("Arial", Font.PLAIN, 50));
+        g.setColor(Color.WHITE);
+        g.drawString("GAME WIN", 5 * Consts.CELL_SIDE, 5 * Consts.CELL_SIDE);
+        g.setFont(new Font("Arial", Font.PLAIN, 40));
+        g.drawString("Eduardo Maciel de Matos", 240, 7 * Consts.CELL_SIDE);
+        g.drawString("João Otávio da Silva"   , 295, 8 * Consts.CELL_SIDE);
         g.dispose();
         g2.dispose();
         if (!getBufferStrategy().contentsLost()) {
@@ -241,11 +278,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
             lLolo.moveRight();
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             lLolo.atira(fases[indiceFaseAtual]);
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_T) {
-            lLolo.adicionaMunicoes(1);
         } else if (e.getKeyCode() == KeyEvent.VK_R) {
-            // reiniciar fase
             reiniciaFase();
             return;
         } else if (e.getKeyCode() == KeyEvent.VK_I) {
