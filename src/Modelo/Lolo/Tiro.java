@@ -1,7 +1,8 @@
-package Modelo;
+package Modelo.Lolo;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
+import Modelo.Elemento;
 
 import javax.swing.*;
 import java.awt.*;

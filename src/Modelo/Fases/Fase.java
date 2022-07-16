@@ -1,6 +1,12 @@
-package Modelo;
+package Modelo.Fases;
 
 import Auxiliar.Posicao;
+import Modelo.Cenario.Agua;
+import Modelo.Cenario.Caixa;
+import Modelo.Cenario.MoitaAmarela;
+import Modelo.Cenario.MoitaVerde;
+import Modelo.Cenario.Coracao;
+import Modelo.Elemento;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,7 @@
-package Modelo;
+package Modelo.Inimigos;
+
+import Modelo.Elemento;
+import Modelo.Fases.Fase;
 
 public abstract class Inimigo extends Elemento {
     protected Inimigo(String sNomeImagePNG) {

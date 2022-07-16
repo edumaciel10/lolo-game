@@ -1,6 +1,8 @@
-package Modelo;
+package Modelo.Inimigos;
 
 import Auxiliar.Consts;
+import Modelo.Fases.Fase;
+import Modelo.Lolo.Lolo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +22,7 @@ public class Tatu extends Inimigo {
 
     private Fase fase;
 
-    protected Tatu(Fase fase) {
+    public Tatu(Fase fase) {
         super(null);
         this.inimigo = true;
         this.fase = fase;

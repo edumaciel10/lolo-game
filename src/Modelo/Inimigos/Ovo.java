@@ -1,7 +1,8 @@
-package Modelo;
+package Modelo.Inimigos;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
+import Modelo.Cenario.Empurravel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,17 +49,17 @@ public class Ovo extends Empurravel {
         if (n > 65) {
             Desenho.getCenario().removePersonagem(this);
             switch (tipoInimigo) {
-                case "Modelo.Cobrinha":
+                case "Modelo.Inimigos.Cobrinha":
                     Cobrinha c = new Cobrinha();
                     c.setPosicao(pPosicao.getLinha(), pPosicao.getColuna());
                     Desenho.getCenario().addPersonagem(c);
                     break;
-                case "Modelo.Caveira":
+                case "Modelo.Inimigos.Caveira":
                     Caveira ca = new Caveira(Desenho.getCenario().getFase());
                     ca.setPosicao(pPosicao.getLinha(), pPosicao.getColuna());
                     Desenho.getCenario().addPersonagem(ca);
                     break;
-                case "Modelo.Tatu":
+                case "Modelo.Inimigos.Tatu":
                     Tatu t = new Tatu(Desenho.getCenario().getFase());
                     t.setPosicao(pPosicao.getLinha(), pPosicao.getColuna());
                     Desenho.getCenario().addPersonagem(t);

@@ -1,7 +1,9 @@
-package Modelo;
+package Modelo.Cenario;
+
+import Modelo.Elemento;
 
 public class Agua extends Elemento {
-    protected Agua() {
+    public Agua() {
         super("agua.png");
         this.bTransponivel = false;
     }
